@@ -1,0 +1,203 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+{% endblock %}
+
+{% block main %}
+<main dir="rtl" class="bg-color-daisy">
+    <div class="row profileShadow " dir="rtl">
+        <div class="container mx-auto justify-content-center d-flex">
+            <div class="text-right mr-2 " dir="rtl">
+                <img class="picture" src="{% static 'images/user.jpg' %}" width="150">
+
+            </div>
+            <div class="ml-auto pr-2">
+                <p class=" pt-4">{{ user.first_name }} {{ user.last_name }}</p>
+            </div>
+            <div class="pt-4  ml-2">
+                <a class="setting p-1 mr-3 btn" href="#">
+                    <i class="fas fa-cog"></i>
+                    تنظیمات
+                </a>
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <section id="profile_content" class="row">
+        <div class="container py-5 mx-auto">
+
+            <article id="content-head" class="row text-center py-4 m-0">
+
+                <div class="item  col-4 mr-4 btn btn-info-my" data-toggle="collapse" data-target="#addition">
+                       سوابق خرید
+                </div>
+                <div class="item  col-4 ml-4 mr-auto btn btn-info-my" data-toggle="collapse" data-target="#specifications">
+                     سبد خرید
+                </div>
+
+            </article>
+
+
+            <article class="content-body ">
+
+                <article id="addition" class="collapse show" data-parent="#profile_content">
+                    <div class="card border-0">
+
+                        <div class="card-header bg-color-gray" style="border-radius: 0;">
+                            <div class=" text-center">
+                                <div class="  w-100" style="font-size: x-large;">
+                                    سوابق خرید
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="card-body py-5 bg-color-daisy table-responsive">
+
+                            <table class="table table-striped " >
+                                <thead class="text-center" >
+                                    <tr style="border-bottom: 2px black solid">
+                                        <th>ردیف</th>
+                                        <th>نام محصول</th>
+                                        <th>نوع محصول</th>
+                                        <th>نوع درز</th>
+                                        <th>سایز</th>
+                                        <th>قیمت</th>
+                                        <th>تعداد</th>
+                                        <th>تاریخ خرید</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody class="text-center">
+                                <!--حلقه ی for برای نمایش سوابق خرید-->
+                                    <!--حلقه ی for برای نمایش سوابق خرید-->
+                                    <!--حلقه ی for برای نمایش سوابق خرید-->
+
+                                    <tr style="border-bottom: 2px black solid">
+                                        <td>1</td>
+                                        <td>محصول 1</td>
+                                        <td>نوع 1</td>
+                                        <td>درز 3</td>
+                                        <td>85</td>
+                                        <td>984000</td>
+                                        <td>230</td>
+                                        <td>98/6/5</td>
+                                    </tr>
+
+                                    <!--حلقه ی for برای نمایش سوابق خرید-->
+                                    <!--حلقه ی for برای نمایش سوابق خرید-->
+                                    <!--حلقه ی for برای نمایش سوابق خرید-->
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+                </article>
+
+                <article id="specifications" class="collapse" data-parent="#profile_content">
+                    <div class="card border-0">
+
+                        
+                        <div class="card-header bg-color-gray" style="border-radius: 0;">
+                                <div class=" text-center">
+                                    <div class="  w-100" style="font-size: x-large;">
+                                            سبد خرید
+                                    </div>
+    
+                                </div>
+                            </div>
+
+                        <div class="card-body py-5 bg-color-daisy">
+
+                            <table class="table table-striped " >
+                                <thead class="text-center" >
+                                <tr style="border-bottom: 2px black solid">
+                                    <th>نام محصول</th>
+                                    <th>نوع محصول</th>
+                                    <th>سایز</th>
+                                    <th>قیمت</th>
+                                    <th>تعداد</th>
+                                </tr>
+                                </thead>
+                                {% if purchased %}
+                                {% for item in purchased %}
+                                <tbody class="text-center">
+                                <tr style="border-bottom: 2px black solid">
+                                    <td>{{ item.name }}</td>
+                                    <td>{{ item.model }}</td>
+                                    <td>{{ item.size }}</td>
+                                    <td>{{ item.price }}</td>
+                                    <td>{{ item.number }}</td>
+                                    
+                                </tr>
+                                {% endfor %}
+                                {% else %}
+                                <p>سبد خرید شما خالی است</p>
+                                {% endif %}
+                            </table>
+
+                        </div>
+
+                    </div>
+                </article>
+
+            </article>
+        </div>
+        
+    </section>
+    <!-- <div  class="col-md-3 mt-1 mb-5 my-md-5 col-8 mx-auto">
+            <div style="background-color: bisque;" class="item text-center" data-toggle="collapse" data-target="#addition">
+
+                    <i class="fas fa-shopping-cart" ></i>
+                    سبد خرید شما
+                </div>
+               
+            </div>
+            {% if purchased %}
+            {% for item in purchased %}
+            <div class="cartBody">
+                <div class="cart-item">
+                    <p class="text-center mt-1">
+                       {{item.name}}  {{ item.model }}
+                    </p>
+                    <div class="d-flex">
+                        <p class="mr-2">
+                            {{ item.price }} تومان هزار
+                        </p>
+                        <div class="d-flex mr-auto pl-4 pt-1">
+                            <i class="fa fa-plus"></i>
+                            <i class="mx-2">{{ item.number }}</i>
+                            <i class="fa fa-minus"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="d-flex mt-5">
+                <p class="mr-1">
+                    جمع خرید
+                </p>
+                <p class="mr-auto ml-1">
+                   {{ summ }},000 تومان
+                </p>
+            </div>
+            {% else %}
+            <p> سبد خرید شما خالی است </p>
+            {% endif %}
+            <div>
+                <a class="btn btn-outline-info w-100" href="#">
+                    تایید و پرداخت
+                </a>
+            </div>
+        </div> -->
+
+</main>
+{% endblock %}
+

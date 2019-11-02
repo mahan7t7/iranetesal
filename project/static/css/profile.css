@@ -1,0 +1,45 @@
+.picture{
+    box-shadow: 0 1px 4px 0 rgba(0,0,0,.2);
+    border-radius: 50%;
+    margin-top: -75px;
+
+
+}
+
+.profileShadow{
+    box-shadow: 0 5px 20px 0 rgba(41,42,51,.14);
+    height: 6em;
+}
+.setting{
+    border-radius: 25px;
+    background-color: #05a3e8;
+    font-size: 15px;
+}
+
+.paddingRight{
+    margin-right: 250px;
+}
+.item{
+    border-radius: 50px;
+    line-height: 2.6em;
+    color: #292a33;
+    background-color: #d3d6e0;
+    align-items: center;
+    justify-content: center;
+}
+.bg-color-gray{
+    color: #292a33;
+    background-color: #d3d6e0;
+}
+
+@media (max-width: 480px) {
+    .item{
+        font-size: small;
+    }
+    .setting{
+        font-size: small;
+    }
+    main > div >div >div >p{
+        padding-right: 0px!important;
+    }
+}

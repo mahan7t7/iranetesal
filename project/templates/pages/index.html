@@ -1,0 +1,161 @@
+{% extends 'abc.html' %}
+{% load static %}
+{% block content %}
+
+<div class="row mt-3 m-0">
+    <article id="main-title" class="text-center color-daisy col-11 mx-auto">
+        <p class=" font-size">شرکت ایران اتصال</p>
+
+        <!--Carousel Wrapper-->
+        <div id="multi-item-example" class="carousel slide carousel-multi-item " data-ride="carousel">
+
+            <!--Controls-->
+
+            <!--/.Controls-->
+
+            <!--Indicators-->
+
+            <!--/.Indicators-->
+
+            <!--Slides-->
+            <div class="container mx-auto">
+                <div class=" carousel-inner mx-auto" role="listbox">
+
+                    <!--First slide-->
+                    <div class="carousel-item  active justify-content-center">
+
+                        <div class="col-md-4 ">
+                            <div class="card mb-2">
+                                <img width="250px" height="250px" class="card-img-top"
+                                     src="{% static 'images/elbow.jpg' %}"
+                                     alt="Card image cap">
+                                <div class="card-body">
+                                    <h4 class="card-title color-dark">زانویی</h4>
+                                    <p class="card-text color-dark">Some quick example text to build on the card title and make up the bulk of the
+                                        card's content.</p>
+                                        <a class="btn btn-info-my" href="{% url 'search' %}">خرید محصول</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="card mb-2">
+                                <img width="250px" height="250px" class="card-img-top" 
+                                     src="{% static 'images/tee.jpg' %}"
+                                     alt="Card image cap">
+                                <div class="card-body">
+                                    <h4 class="card-title color-dark">سه راهی</h4>
+                                    <p class="card-text color-dark">Some quick example text to build on the card title and make up the bulk of the
+                                        card's content.</p>
+                                    <a class="btn btn-info-my" href="{% url 'search' %}">خرید محصول</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="card mb-2">
+                                <img width="250px" height="250px" class="card-img-top"
+                                     src="{% static 'images/nippel.jpg' %}"
+                                     alt="Card image cap">
+                                <div class="card-body">
+                                    <h4 class="card-title color-dark">سر دنده</h4>
+                                    <p class="card-text color-dark">Some quick example text to build on the card title and make up the bulk of the
+                                        card's content.</p>
+                                        <a class="btn btn-info-my" href="{% url 'search' %}">خرید محصول</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--/.First slide-->
+
+                    <!--Second slide-->
+                    <div class="carousel-item justify-content-center">
+
+                        <div class="col-md-4">
+                            <div class="card mb-2">
+                                <img width="250px" height="250px" class="card-img-top"
+                                     src="{% static 'images/reducer.jpg' %}" alt="Card image cap">
+                                <div class="card-body">
+                                    <h4 class="card-title color-dark">تبدیل</h4>
+                                    <p class="card-text color-dark">Some quick example text to build on the card title and make up the bulk of the
+                                        card's content.</p>
+                                        <a class="btn btn-info-my" href="{% url 'search' %}">خرید محصول</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="card mb-2">
+                                <img width="250px" height="250px" class="card-img-top"
+                                     src="{% static 'images/cap.jpg' %}" alt="Card image cap">
+                                <div class="card-body">
+                                    <h4 class="card-title color-dark">کپ</h4>
+                                    <p class="card-text color-dark">Some quick example text to build on the card title and make up the bulk of the
+                                        card's content.</p>
+                                        <a class="btn btn-info-my" href="{% url 'search' %}">خرید محصول</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    
+
+                    </div>
+                    <!--/.Second slide-->
+
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#multi-item-example" data-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class=" carousel-control-next" href="#multi-item-example" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </a>
+            <!--<div class="controls-top">-->
+                <!--<a class="btn-floating" href="#multi-item-example" data-slide="prev"><i class="fas fa-chevron-left"></i></a>-->
+                <!--<a class="btn-floating" href="" data-slide="next"><i-->
+                        <!--class="fas fa-chevron-right"></i></a>-->
+            <!--</div>-->
+            <!--/.Slides-->
+
+        </div>
+        <!--/.Carousel Wrapper-->
+
+
+    </article>
+</div>
+
+
+
+{% endblock %}
+
+{% block main %}
+
+<main class="background " dir="rtl">
+    <section id="main-text" class="py-5">
+        <div class="container mx-auto">
+            <div class="row ">
+                <div class="col-8 mx-auto">
+                    <h2 class="pb-3 text-center"> درباره ایران اتصال</h2>
+                    <p class="text-justify">
+                        صنايع فولادي ايران اتصال_آسيا توليد اتصالات گاز رادر سال 1369 ازكارگاهي كوچك واقع در سه راه افسريه تهران آغاز نمود .درآغاز شروع به توليد محدود زانوهاي جوشي كرد .اما پس از مدتي وپس از كسب تجربه مطلوب موفق به گسترش فعاليت خود شد .درسال 1373ماباكوشش وتلاش فراوان توانستيم واحد نوليدي انواع سه راهي جوشی را راه اندازي نموده وبا ياري خداوند متعال به يكي از بزرگترين توليدكنندگان اتصالات جوشی گاز تبديل شويم .ازسال 1375 هدف ما بر روي توليد محصولاتي با كيفيت عالي متمركزگرديد.با مطالعه وسعي در به روز كردن روش توليد به راحتي توانستيم محصولاتي با كيفيتي قابل رقابت با محصولات خارجي توليد نماييم.محصولات ما شامل موارد ذيل مي باشد:
+                    </p>
+                    <p class="text-justify">
+                        الف -انواع ز-انويي جوشی شامل درزدار ومانيسمان از سايز" 2/1الي"14
+                        <br>
+                        ب-انواع سه راهي جوشی شامل درزدار ومانيسمان از سايز"2/1الي" 8
+                        <br>
+                        ج-انواع تبديل جوشی شامل درزدار ومانيسمان از سايز"4/3الي "12
+                        <br>
+                        د-انواع سردنده شامل درزدار ومانيسمان از سايز "2/1الي"6
+                        <br>
+                        ه-انواع كپ جوشی شامل تخت وگود
+                    </p>
+                </div>
+                <img class="text-center mx-auto" width="350" src="{% static 'images/ISO9001.jpg' %}">
+            </div>
+        </div>
+    </section>
+</main>
+
+{% endblock %}

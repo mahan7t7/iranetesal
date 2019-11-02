@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+<div class="container mx-auto text-right my-5" dir="rtl">
+        <div class="row  ">
+    
+            <!--حلقه ی for برای نمایش لیست اخبار و مقالات-->
+            <!--حلقه ی for برای نمایش لیست اخبار و مقالات-->
+            <!--حلقه ی for برای نمایش لیست اخبار و مقالات-->
+    
+            <section class=" my-2 col-12 col-md-4 col-sm-6">
+                <!-- Card -->
+                {% if news %}
+                {% for item in news %}
+                <div class="card mx-auto" >
+    
+                    <!-- Card image -->
+                    <img class="card-img-top" src="{% static 'images/141.jpg' %}" alt="Card image cap">
+                    
+                    <!-- Card content -->
+                    <div class="card-body">
+                        
+                        <!-- Title -->
+                        <h4 class="card-title " style="font-size: large"><a>{{ item.عنوان }}</a></h4>
+                        <!-- Text -->
+                        <p class="card-text"> {{ item.توضیحات |truncatewords:10}} </p>
+                        <!-- Button -->
+                        <a href="{% url 'newsdetail' item.id %}" class="btn btn-outline-info waves-effect waves-light">مطالعه مقاله</a>
+     
+                    </div>
+    
+                </div>
+                {% endfor %}
+                {% else %}
+                <p>no news</p>
+                {% endif %}
+                <!-- Card -->
+    
+    
+    
+            </section>
+    
+            <!--حلقه ی for برای نمایش لیست اخبار و مقالات-->
+            <!--حلقه ی for برای نمایش لیست اخبار و مقالات-->
+            <!--حلقه ی for برای نمایش لیست اخبار و مقالات-->
+    
+    
+    
+    
+    
+    
+        </div>
+        <div class="content-pagination">
+            <a href="#">۱</a>
+            <a href="#">۲</a>
+            <a href="#">۳</a>
+            <span >…</span>
+            <a href="#">۱۴</a>
+            <a href="#">بعدی »</a>
+        </div>
+    </div>
+    
+{% endblock %}

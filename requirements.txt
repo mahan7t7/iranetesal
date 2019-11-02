@@ -1,0 +1,9 @@
+Django
+pillow
+apscheduler
+uuid
+requests
+django_otp
+xlwt
+django-phonenumber-field
+phonenumbers

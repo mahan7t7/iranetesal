@@ -1,0 +1,22 @@
+@font-face {
+    font-family: Shabnam;
+    src: url(../../static/fonts/Shabnam.ttf);
+}
+
+body {
+    font-family: Shabnam;
+}
+#header{
+    background-color: #267082;
+    direction: rtl;
+}
+#content > h1{
+    visibility: hidden;
+}
+#content > h1:before{
+    content: "مدیریت سایت"!important;
+    visibility: visible;
+}
+#content-related .module h2 {
+    text-align: right!important;
+}
