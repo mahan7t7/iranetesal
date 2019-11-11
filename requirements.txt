@@ -7,3 +7,5 @@ django_otp
 xlwt
 django-phonenumber-field
 phonenumbers
+gunicorn
+psycopg2
