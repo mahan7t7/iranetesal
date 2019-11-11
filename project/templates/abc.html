@@ -278,30 +278,39 @@
 
 
                             <div class="md-form mt-2" style="z-index: 1">
-                                <input type="text" name="first_name" placeholder="نام " class="form-control underline shadow">
+                                <input type="text" name="first_name" placeholder="نام " class="form-control underline shadow" required>
                             </div>
                             <div class="md-form mt-2" style="z-index: 1">
-                                <input type="text" name="last_name" placeholder=" نام خانوادگی" class="form-control underline shadow">
+                                <input type="text" name="last_name" placeholder=" نام خانوادگی" class="form-control underline shadow" required>
                             </div>
                             <div class="md-form mt-2" style="z-index: 1">
-                                <input type="text" name="company_name" placeholder="نام شرکت" class="form-control underline shadow">
+                                <input type="text" name="company_name" placeholder="نام شرکت(اختیاری)" class="form-control underline shadow">
                             </div>
                             <!-- E-mail -->
                             <div class="md-form mt-2">
-                                <input type="text" name="email" placeholder=" ایمیل  " class="form-control underline shadow">
+                                <input type="text" name="email" placeholder=" ایمیل  " class="form-control underline shadow" required>
                             </div>
 
                             <div class="md-form mt-2">
-                                <input type="text" name="phone" placeholder=" شماره تلفن  " class="form-control underline shadow">
+                                <input type="text" name="phone" placeholder=" شماره تلفن  " class="form-control underline shadow" required>
                             </div>
 
                             <!-- Password -->
                             <div class="md-form mt-2">
-                                <input type="password" name="rpassword" placeholder="رمز عبور" class="form-control underline shadow" >
+                                <input type="password" name="rpassword" placeholder="رمز عبور" class="form-control underline shadow" required>
                             </div>
                             
-
                             
+                            <br>
+                            <div class="text-right">
+                                <label class="radio-inline">
+                                     <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked> تایید از طریق شماره همراه
+                                </label>
+                                <br>
+                                <label class="radio-inline">
+                                    <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> تایید از طریق ایمیل
+                                </label>
+                            </div>
 
 
 
@@ -437,7 +446,7 @@
 
                     <div class="d-flex card-header info-color white-text text-center pt-3 py-2">
                         <div class="text-right" style="font-size: 20px">
-                            تایید شماره همراه
+                            تایید حساب کاربری
                         </div>
                     </div>
 
@@ -445,11 +454,11 @@
                     <div class="card-body px-lg-5 pt-2">
 
                         <!-- Form -->
-                        <form class="text-center" style="color: #757575;" action="#!">
+                        <form class="text-center" style="color: #757575;" action="{% url 'index' %}" method="post"> {% csrf_token %}
 
 
                             <div class="md-form mt-2" >
-                                <input type="text" placeholder="کد تایید" class="form-control underline shadow">
+                                <input type="text" name="confirm_code" placeholder="کد تایید" class="form-control underline shadow">
                             </div>
 
                             <div id="counter" class="md-form mt-2 mr-1 text-right">

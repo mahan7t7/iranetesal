@@ -13,6 +13,6 @@ urlpatterns = [
     path('news/', views.news_view , name='news'),
     path('<int:id>', views.news_detail_view, name='newsdetail'),
     path('purchase-success/', views.finished_purchase , name='sold'),
-    url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
-        views.activate, name='activate'),
+    #url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+        #views.activate, name='activate'),
 ]
