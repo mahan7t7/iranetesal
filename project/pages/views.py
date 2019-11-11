@@ -7,6 +7,13 @@ from django.contrib.auth.decorators import login_required
 from accounts.models import User as User, UserManager
 from django.contrib.auth import logout
 from django.contrib.auth.signals import user_logged_out
+from django.core.exceptions import ObjectDoesNotExist
+
+from django.core.mail import send_mass_mail
+from .backends import TOTPVerification
+from unittest import mock
+import requests
+import time
 
 from django.http import HttpResponse
 from django.contrib.sites.shortcuts import get_current_site
@@ -32,37 +39,86 @@ from sold.models import Sold , SoldManager
 
 def index_view(request):
     elbow = Elbow.objects.get(pk=1)
+    context = { 'elbow': elbow}
 
     # Register
     if request.method == 'POST':
         if 'first_name' and 'last_name' and 'email' and 'phone' and 'rpassword' in request.POST:
             if request.POST['first_name'] and request.POST['last_name'] and request.POST['email'] and request.POST['phone'] and request.POST['rpassword']:
-                first_name = request.POST['first_name']
-                last_name = request.POST['last_name']
-                company_name = request.POST['company_name']
-                email = request.POST['email']
-                phone = request.POST['phone']
-                password = request.POST['rpassword']
-                user = User.objects.create_user_complete(first_name, last_name, company_name, phone, email, password)
-                current_site = get_current_site(request)
-                mail_subject = 'Activate your blog account.'
-                message = render_to_string('acc_active_email.html', {
-                    'user':user,
-                    'domain': current_site.domain,
-                    'uid':urlsafe_base64_encode(force_bytes(user.pk)),
-                    'token':account_activation_token.make_token(user),
-                    })
-                to_email = user.email
-                email = EmailMessage(
-                            mail_subject, message, to=[to_email]
-                )
                 try:
-                    email.send()
-                except:
-                    messages.warning(request , 'ایمیل وارد شده صحیح نیست')
-            else: 
+                    if User.objects.filter(email = request.POST['email']) :
+                        messages.warning(request, 'این ایمیل قبلا استفاده شده است')
+                        return render(request , 'pages/index.html' , context)
+                except ObjectDoesNotExist:
+                    raise
+                try:
+                    if User.objects.filter(phone = request.POST['phone']) : 
+                        messages.warning(request, 'این شماره همراه قبلا استفاده شده است')
+                        return render(request , 'pages/index.html' , context)   
+                except ObjectDoesNotExist:
+                    raise        
+
+                request.session["first_name"]    = request.POST['first_name']
+                request.session["last_name"]     = request.POST['last_name']
+                request.session["company_name"]  = request.POST['company_name']
+                request.session["email"]         = request.POST['email']
+                request.session["phone"]         = request.POST['phone']
+                request.session["password"]      = request.POST['rpassword']
+
+                request.session["inlineRadioOptions"] = request.POST['inlineRadioOptions']
+                verify = request.session["inlineRadioOptions"]
+                totpv = TOTPVerification()
+                generated_token = totpv.generate_token()
+                request.session["generated_token"] =  generated_token
+                phone = request.session["phone"]
+                email = request.session["email"]
+                first_name = request.session["first_name"]
+                if verify == "option2":
+                    message2 = ('Iran Etesal', 'Dear '+ first_name+'\nYour confirmation code is: '+ generated_token , 'enigma7t7@gmail.com', [email])
+                    send_mass_mail((message2, ), fail_silently=False)
+                else:
+                    url = "https://api.ghasedak.io/v2/sms/send/simple"
+                    payload = {'message':'your activation code is: '+ generated_token , 'receptor' : phone, 'linenumber': '30005006004963', 'senddate': '', 'checkid': ''}
+                    headers = {
+                        'apikey': "e64d32090d1ac50b358684636f4bdf286a70fe8ac30cb12f7a0e2b4a4ba81d3f",
+                        }
+
+                    response = requests.post(url, data=payload, headers=headers)
+                    sms = response.text
+
+                context = { 'elbow': elbow}
+                return render(request , 'pages/verification.html' , context)
+
+            else:
+                print("incomplete info")
+        else:
+            print("incomplete info")
+    # Confirm Register
+    if request.method == 'POST':
+        if 'confirm_code'  in request.POST:
+            if request.POST['confirm_code']:
+                first_name       = request.session["first_name"]
+                last_name        = request.session["last_name"]
+                company_name     = request.session["company_name"]
+                email            = request.session["email"]
+                phone            = request.session["phone"]
+                password         = request.session["password"]
+
+
+                token = request.POST['confirm_code']
+                generated_token = request.session["generated_token"]
+                if token==generated_token:
+                    User.objects.create_user_complete(first_name, last_name, company_name, phone, email, password)
+                    user = authenticate(username = email, password = password)
+                    login(request, user)
+                else:
+                    messages.warning(request , 'اطلاعات وارد شده صحیح نیست')    
+            else:
                 messages.warning(request , 'اطلاعات وارد شده صحیح نیست')
-            
+        else:
+            messages.warning(request , 'اطلاعات وارد شده صحیح نیست')
+
+        return render(request , 'pages/index.html' , context)    
             
         
       
@@ -79,36 +135,45 @@ def index_view(request):
                 if user is not None:
                     login(request, user)
                     messages.success(request, 'شما با موفقیت وارد حساب کاربری خود شدید')
+                else:
+                    messages.warning(request , 'اطلاعات وارد شده صحیح نیست')
+            else:
+                messages.warning(request , 'اطلاعات وارد شده صحیح نیست')
+        else:
+            messages.warning(request , 'اطلاعات وارد شده صحیح نیست')        
 
-    if request.user.is_authenticated:
-        purchased = Purchase.objects.filter(user=request.user)
-        summ = 0
-        for item in purchased:
-            summ += item.price 
-        
-        context = {
-            'purchased': purchased ,
-            'summ': summ,
-            'elbow': elbow
-            }   
-    else:
-        context = { 'elbow': elbow}
+    context = { 'elbow': elbow}
     return render(request , 'pages/index.html' , context)
 
-def activate(request, uidb64, token , backend='django.contrib.auth.backends.ModelBackend'):
-    try:
-        uid = force_text(urlsafe_base64_decode(uidb64))
-        user = User.objects.get(pk=uid)
-    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
-        user = None
-    if user is not None and account_activation_token.check_token(user, token):
-        user.active = True
-        user.save()
-        login(request, user , backend='django.contrib.auth.backends.ModelBackend')
-        return redirect('index')
-        messages.success(request, 'تایید حساب کاربری شما با موفقیت انجام شد')
-    else:
-        messages.error(request, 'لینک تایید حساب کاربری صحیح نمی باشد')
+    #if request.user.is_authenticated:
+     #   purchased = Purchase.objects.filter(user=request.user)
+      #  summ = 0
+       # for item in purchased:
+        #    summ += item.price 
+        
+        #context = {
+        #    'purchased': purchased ,
+        #    'summ': summ,
+         #   'elbow': elbow
+        #    }   
+    #else:
+     #   context = { 'elbow': elbow}
+   # return render(request , 'pages/index.html' , context)
+
+#def activate(request, uidb64, token , backend='django.contrib.auth.backends.ModelBackend'):
+    #try:
+     #   uid = force_text(urlsafe_base64_decode(uidb64))
+      #  user = User.objects.get(pk=uid)
+   # except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+      #  user = None
+   # if user is not None and account_activation_token.check_token(user, token):
+     #   user.active = True
+     #   user.save()
+     #   login(request, user , backend='django.contrib.auth.backends.ModelBackend')
+      #  return redirect('index')
+      #  messages.success(request, 'تایید حساب کاربری شما با موفقیت انجام شد')
+   # else:
+        #messages.error(request, 'لینک تایید حساب کاربری صحیح نمی باشد')
 
 
 def about_view(request):

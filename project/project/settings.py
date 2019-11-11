@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'h&q9)jrt&9p)*aol1m7*wyrl__0ham#up-&s0$+cfefax-)1e3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [".iranetesal.ir" , "45.82.137.244"]
 
 
 # Application definition
@@ -94,8 +94,12 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'iranetesal',
+        'USER': 'admin',
+        'PASSWORD':'Home123456@',
+        'HOST':'localhost',
+        'PORT':'',
     }
 }
 
@@ -132,12 +136,12 @@ USE_L10N = True
 
 USE_TZ = True
 
-EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'ronald.j1377@gmail.com'
-EMAIL_HOST_PASSWORD = 'zetaki007'
-EMAIL_PORT = 587
-
+EMAIL_PORT = 465 
+EMAIL_HOST_USER = 'enigma7t7@gmail.com'
+EMAIL_HOST_PASSWORD = 'M1010100001m'
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
 
 
 # Static files (CSS, JavaScript, Images)
