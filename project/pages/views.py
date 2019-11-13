@@ -115,10 +115,10 @@ def index_view(request):
                     messages.warning(request , 'اطلاعات وارد شده صحیح نیست')    
             else:
                 messages.warning(request , 'اطلاعات وارد شده صحیح نیست')
-        else:
-            messages.warning(request , 'اطلاعات وارد شده صحیح نیست')
+      #  else:
+       #     messages.warning(request , 'اطلاعات وارد شده صحیح نیست')
 
-        return render(request , 'pages/index.html' , context)    
+            return render(request , 'pages/index.html' , context)    
             
         
       
@@ -299,6 +299,12 @@ def news_detail_view (request , id):
         'news':news
     }
     return render(request, 'pages/news_open.html', context)
+def delete_one_purchase(request , id):
+    Purchase.objects.filter(id=id).delete() 
+    return redirect(search_view)
+def delete_cart(request):
+    delete_purchase(request.user)
+    return redirect(search_view)
 
 def delete_purchase(user):
     purchase = Purchase.objects.filter(user=user)

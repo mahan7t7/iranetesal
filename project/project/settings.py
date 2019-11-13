@@ -25,11 +25,8 @@ SECRET_KEY = 'h&q9)jrt&9p)*aol1m7*wyrl__0ham#up-&s0$+cfefax-)1e3'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-<<<<<<< HEAD
+
 ALLOWED_HOSTS = ["iranetesal.ir","45.82.137.244"]
-=======
-ALLOWED_HOSTS = [".iranetesal.ir" , "45.82.137.244"]
->>>>>>> 5b53a78404c223789b2d6f09f91de44f021fd6f3
 
 
 # Application definition
@@ -141,7 +138,7 @@ USE_L10N = True
 USE_TZ = True
 
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 465 
+EMAIL_PORT = 465
 EMAIL_HOST_USER = 'enigma7t7@gmail.com'
 EMAIL_HOST_PASSWORD = 'M1010100001m'
 EMAIL_USE_TLS = False
