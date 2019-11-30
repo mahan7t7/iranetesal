@@ -13,7 +13,7 @@ def start():
 
 
 def send_email ():
-        msg = EmailMessage('Subject of the Email', 'Body of the email', 'ronald.j1377@gmail.com', ['reza_avd@yahoo.com'])
+        msg = EmailMessage('Subject of the Email', 'Body of the email', 'enigma7t7@gmail.com', ['reza_avd@yahoo.com'])
         msg.content_subtype = "html"  
         msg.attach_file(write_excel())
         sent_email()
