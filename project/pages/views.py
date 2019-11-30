@@ -135,14 +135,14 @@ def index_view(request):
                 try:
                     user = authenticate(username = username, password = password)
                 except:
-                     messages.warning(request, 'Invalid Input')
+                     messages.warning(request, 'اطلاعات وارد شده صحیح نیست')
                      return render(request, 'pages/index.html', context)
                 if user is not None:
                     try:
                         login(request, user)
                         messages.success(request, 'شما با موفقیت وارد حساب کاربری خود شدید')
                     except:
-                        messages.warning(request, 'Invalid Input')
+                        messages.warning(request, 'اطلاعات وارد شده صحیح نیست')
                         return render(request, 'pages/index.html',context)
                 else:
                     messages.warning(request , 'اطلاعات وارد شده صحیح نیست')
