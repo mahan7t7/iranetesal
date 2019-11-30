@@ -111,6 +111,7 @@ def index_view(request):
                     User.objects.create_user_complete(first_name, last_name, company_name, phone, email, password)
                     user = authenticate(username = email, password = password)
                     login(request, user)
+                    messages.success(request, 'ثبت نام و تایید حساب کاربری با موفقیت انجام شد')
                 else:
                     messages.warning(request , 'اطلاعات وارد شده صحیح نیست')    
             else:
