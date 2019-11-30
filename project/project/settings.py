@@ -26,7 +26,7 @@ SECRET_KEY = 'h&q9)jrt&9p)*aol1m7*wyrl__0ham#up-&s0$+cfefax-)1e3'
 DEBUG = False
 
 
-ALLOWED_HOSTS = ["iranetesal.ir","45.82.137.244"]
+ALLOWED_HOSTS = ["iranetesal.ir",".iranetesal.ir","45.82.137.244"]
 
 
 # Application definition

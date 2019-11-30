@@ -130,18 +130,29 @@ def index_view(request):
         if 'username' and 'password' in request.POST:
             username = request.POST['username']
             password = request.POST['password']
+            context = { 'elbow':elbow }
             if username is not None and password is not None:
-                user = authenticate(username = username, password = password)
+                try:
+                    user = authenticate(username = username, password = password)
+                except:
+                     messages.warning(request, 'Invalid Input')
+                     return render(request, 'pages/index.html', context)
                 if user is not None:
-                    login(request, user)
-                    messages.success(request, 'شما با موفقیت وارد حساب کاربری خود شدید')
+                    try:
+                        login(request, user)
+                        messages.success(request, 'شما با موفقیت وارد حساب کاربری خود شدید')
+                    except:
+                        messages.warning(request, 'Invalid Input')
+                        return render(request, 'pages/index.html',context)
                 else:
                     messages.warning(request , 'اطلاعات وارد شده صحیح نیست')
+                    return render(request, 'pages/index.html', context)
             else:
                 messages.warning(request , 'اطلاعات وارد شده صحیح نیست')
+                return render(request, 'pages/index.html', context)
         else:
             messages.warning(request , 'اطلاعات وارد شده صحیح نیست')        
-
+            return render(request, 'pages/index.html', context) 
     context = { 'elbow': elbow}
     return render(request , 'pages/index.html' , context)
 

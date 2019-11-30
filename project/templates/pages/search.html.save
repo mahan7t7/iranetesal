@@ -1,0 +1,192 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+<div class="text-right" dir="rtl">
+        <div class="container-fluid pt-2">
+    
+    
+    
+            <section id="grouping" class="row">
+                <div class=" col-md-9 " >
+                    <div class="card container mx-auto p-0" style="border: 1px #cda34f solid">
+                        <div class="card-header  info-color white-text text-center">
+                            فیلتر محصولات
+                        </div>
+                        <div id="cardbody" class="card-body text-right" >
+    
+    
+                            <form class="row mx-auto" action="{% url 'search' %}">
+                                <div class="col-10 col-md-6 col-sm-8 mx-auto">
+                                    <div class="md-form mt-2 mx-auto"  >
+                                        <label>نام محصول:</label>
+                                        <input placeholder="عبارت مورد نظر را جستجو کنید ..." class="form-control underline shadow SetWidth"  >
+                                    </div>
+                                </div>
+    
+                                <div class="col-10 col-md-6 col-sm-8 mx-auto ">
+                                    <div  class="md-form mt-2 mx-auto " >
+                                        <label>انتخاب محصول:</label>
+                                        <select name="name" class="custom-select form-control SetWidth">
+                                                <option selected="true" disabled="disabled">نام محصول</option>
+                                            <option value="elbow">زانویی</option>
+                                            <option value="tee">سه راهی</option>
+                                            <option value="nippel"> سر دنده</option>
+                                            <option value="cap">کپ</option>
+                                            <option value="reducer">تبدیل</option>
+                                        </select>
+                                    </div>
+                                </div>
+    
+                                <div class="col-10 col-md-6 col-sm-8 mx-auto">
+                                    <div  class="md-form mt-2 mx-auto " >
+                                        <label>نوع محصول:</label>
+                                        <select  name="مدل" class="custom-select form-control SetWidth">
+                                            <option selected="true" disabled="disabled">نوع محصول</option>
+                                            <option value="darzdar">درزدار</option>
+                                            <option value="standard">استاندارد</option>
+                                            <option value="mannesman">مانیسمان</option>
+                                            <option value="type40">رده چهل</option>
+                                            <option value="flat">تخت</option>
+                                            <option value="deep">گود</option>
+                                        </select>
+                                    </div>
+                                </div>
+    
+                                <div class="col-10 col-md-6 col-sm-8 mx-auto">
+                                    <div class="md-form mx-auto" style="margin-top: 40px;">
+                                        <button class="btn btn-outline-info btn-block SetWidth" type="submit">اعمال فیلتر</button>
+                                    </div>
+                                </div>
+                                <!-- <button class="btn btn-outline-info btn-block mt-4" type="submit">اعمال فیلتر</button> -->
+                            </form>
+    
+    
+    
+    
+    
+                        </div>
+    
+                    </div>
+                    <div id="productList" class="row pt-2 px-0 ">
+    
+                        <!--حلقه ی for برای محصولات فروشگاه-->
+                        <!--حلقه ی for برای محصولات فروشگاه-->
+                        <!--حلقه ی for برای محصولات فروشگاه-->
+                    {% if products %}
+                        {% for product in products %}
+                        <div class="col-11 col-md-6 mx-auto">
+                            
+                            <div class="card mb-3 mx-auto" style="max-width: 540px;border: 1px #4fbacd solid">
+                                <div class="row no-gutters" >
+                                    <div class="col-4">
+                                        <img src="{% static 'images/elbow.jpg' %}" class="card-img" alt="...">
+                                    </div>
+                                    <div class="col-8">
+                                         {% if user.is_authenticated %}
+                                            <form  class="row mx-auto" action="{% url 'search' %}" method="POST"> {% csrf_token %}
+                                                    <input style="display:none" type="text" name="name" value="{{ product.get_name_display }}">
+                                                    <input style="display:none" type="text" name="model" value="{{ product.get_مدل_display }}">
+                                                    <input style="display:none" type="text" name="size" value="{{ product.get_سایز_display }}">
+                                                    <input style="display:none" type="text" name="number" value="{{ product.get_تعداد_کیسه_display }}">
+                                                    <input style="display:none" type="text" name="price" value="{{ product.قیمت }}">
+                                                    {% else %}
+                                                    <p>برای خرید این محصول لطفا ابتدا ثبت نام کنید</p>
+                                                    {% endif %}
+                                        <div class="card-body">
+                                            <div value="name" class="card-title color-white radius p-1 d-inline" style="background-color: #005c78;">
+                                                    {{ product.get_name_display }}
+                                                <strong class="" >{{ product.get_مدل_display }}</strong>
+                                            </div>
+                                            <p class="card-text mt-2" style="font-size: small" > تعداد در کیسه: {{ product.get_تعداد_کیسه_display }}</p>
+                                            <hr>
+                                            <p class="card-text" style="font-size: small" > سایز : {{ product.get_سایز_display }}</p>
+                                            <hr>
+                                            <p class="card-text" style="font-size: small" > قیمت: {{ product.قیمت }} هزار تومان </p>
+                                            <button class="btn bg-color-gold" type="submit" style="font-size: small">اضافه به سبد خرید</button>
+                                            </form>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% endif %}    
+                        
+                        <!--حلقه ی for برای محصولات فروشگاه-->
+                        <!--حلقه ی for برای محصولات فروشگاه-->
+                        <!--حلقه ی for برای محصولات فروشگاه-->
+    
+                    </div>
+    
+                    <div class="content-pagination">
+                        <a href="#">۱</a>
+                        <a href="#">۲</a>
+                        <a href="#">۳</a>
+                        <span >…</span>
+                        <a href="#">۱۴</a>
+                        <a href="#">بعدی »</a>
+                    </div>
+                </div>
+    
+                <div  class="col-md-3 mt-1 mb-5 my-md-5 col-8 mx-auto">
+                    <div class="cartHeader p-3 radius">
+                        <i class="fas fa-shopping-cart" ></i>
+                        سبد خرید شما
+                    </div>
+                    {% if purchased %}
+                    {% for item in purchased %}
+                    
+                    <div class="cartBody">
+                        <div class="cart-item">
+                            <div class="d-flex">
+                                    <p class="mr-2 mt-1 text-center bg-color-mine text-white p-1 radius setWidth" >
+                                            {{item.name}}  {{ item.model }}
+                                    </p>
+                                    <p class="ml-2 mr-auto text-center mt-1 bg-color-mine text-white p-1 radius setWidth" >
+                                        سایز: {{ item.size }}
+                                    </p>
+                            </div>
+                            
+                            <div class="d-flex">
+                                <p class="mr-2  mt-1 bg-color-mine text-center text-white p-1 radius setWidth" >
+                                    {{ item.price }} هزار تومان
+                                </p>
+                                <p class="ml-2 mr-auto text-center mt-1 bg-color-mine text-white p-1 radius setWidth" >
+                                    
+                                    {{ item.number }}
+                                    
+                                </p>
+                            </div>
+		            <div class="d-flex" >
+			       <a class="btn btn-outline-danger text-center mt-1 text-red p-1 radius setWidth" href="{% url 'del' item.id %}">
+			            
+				</a>
+			   </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <div class="d-flex mt-5">
+                        <p class="mr-1">
+                            جمع خرید
+                        </p>
+                        <p class="mr-auto ml-1">
+                           {{ summ }},000 تومان
+                        </p>
+                    </div>
+                    {% else %}
+                    <p> سبد خرید شما خالی است </p>
+                    {% endif %}
+                    <div>
+                        <a class="btn btn-outline-info w-100" href="{% url 'sold' %}">
+                            تایید و پرداخت
+                        </a>
+                    </div>
+                </div>
+            </section>
+    
+    
+    
+    
+        </div>
+{% endblock %}
