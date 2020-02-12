@@ -98,7 +98,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'iranetesal',
         'USER': 'admin',
-        'PASSWORD':'Home123456@',
+        'PASSWORD':'',
         'HOST':'localhost',
         'PORT':'',
     }
@@ -140,7 +140,7 @@ USE_TZ = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = 'enigma7t7@gmail.com'
-EMAIL_HOST_PASSWORD = 'M1010100001m'
+EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
 
