@@ -95,6 +95,8 @@ class User(AbstractBaseUser):
     last_name         = models.CharField(verbose_name='last name', max_length=60)
     date_joined       = models.DateTimeField(verbose_name='date joined', auto_now_add=True)
     last_login        = models.DateTimeField(verbose_name='last login', auto_now=True)
+    phone_verified    = models.BooleanField(default=False)
+    email_verified    = models.BooleanField(default=False)
     active            = models.BooleanField(default=True)
     vip               = models.BooleanField(default=False)
     staff             = models.BooleanField(default=False) # a admin user; non super-user
