@@ -1,4 +1,4 @@
-from django_otp.oath import TOTP
+from .oath import TOTP
 from django_otp.util import random_hex
 import time
 
